@@ -1,3 +1,9 @@
+/**
+ * @Author: jankincai
+ * @Date:   2022-02-28 15:56:20
+ * @Last Modified by:   jankincai
+ * @Last Modified time: 2022-02-28 16:14:47
+ */
 /*
  * Copyright 2016 Intel Corporation
  *
@@ -44,7 +50,7 @@ tap_inject_insert_tap (u32 sw_if_index, u32 tap_fd, u32 tap_if_index, u32 clib_f
   vec_validate_init_empty (im->sw_if_index_to_clib_file_index, sw_if_index, ~0);
 
   im->sw_if_index_to_clib_file_index[sw_if_index] = clib_file_index;
-  
+
   im->sw_if_index_to_tap_fd[sw_if_index] = tap_fd;
   im->sw_if_index_to_tap_if_index[sw_if_index] = tap_if_index;
 
@@ -273,7 +279,12 @@ tap_inject_enable_disable_all_interfaces (int enable)
   /* Collect all the interface indices. */
   interfaces = vnet_main->interface_main.hw_interfaces;
   indices = enable ? &im->interfaces_to_enable : &im->interfaces_to_disable;
-  pool_foreach_old (hw, interfaces, vec_add1 (*indices, hw - interfaces));
+  // pool_foreach_old (hw, interfaces, vec_add1 (*indices, hw - interfaces));
+
+  pool_foreach(hw, interfaces)
+  {
+    vec_add1(*indices, hw - interfaces);
+  }
 
   if (tap_inject_iface_isr (vlib_get_main (), 0, 0))
     return clib_error_return (0, "tap-inject interface add del isr failed");
