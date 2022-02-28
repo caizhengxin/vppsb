@@ -1,3 +1,9 @@
+/**
+ * @Author: jankincai
+ * @Date:   2022-02-28 15:56:20
+ * @Last Modified by:   jankincai
+ * @Last Modified time: 2022-02-28 17:06:59
+ */
 /*
  * Copyright 2016 Intel Corporation
  *
@@ -213,19 +219,19 @@ add_del_route (ns_route_t * r, int is_del)
     }
   else if (r->rtm.rtm_family == AF_INET6)
     {
-      fib_prefix_t prefix;
-      ip46_address_t nh;
-      memset (&prefix, 0, sizeof (prefix));
-      prefix.fp_len = r->rtm.rtm_dst_len;
-      prefix.fp_proto = FIB_PROTOCOL_IP6;
-      clib_memcpy (&prefix.fp_addr.ip6, r->dst, sizeof (prefix.fp_addr.ip6));
-      memset (&nh, 0, sizeof (nh));
-      clib_memcpy (&nh.ip6, r->gateway, sizeof (nh.ip6));
-      fib_table_entry_path_add (0, &prefix, FIB_SOURCE_API,
-                                FIB_ENTRY_FLAG_NONE, prefix.fp_proto,
-                                &nh, sw_if_index, 0,
-                                0 /* weight */, NULL,
-                                FIB_ROUTE_PATH_FLAG_NONE);
+    //   fib_prefix_t prefix;
+    //   ip46_address_t nh;
+    //   memset (&prefix, 0, sizeof (prefix));
+    //   prefix.fp_len = r->rtm.rtm_dst_len;
+    //   prefix.fp_proto = FIB_PROTOCOL_IP6;
+    //   clib_memcpy (&prefix.fp_addr.ip6, r->dst, sizeof (prefix.fp_addr.ip6));
+    //   memset (&nh, 0, sizeof (nh));
+    //   clib_memcpy (&nh.ip6, r->gateway, sizeof (nh.ip6));
+    //   fib_table_entry_path_add (0, &prefix, FIB_SOURCE_API,
+    //                             FIB_ENTRY_FLAG_NONE, prefix.fp_proto,
+    //                             &nh, sw_if_index, 0,
+    //                             0 /* weight */, NULL,
+    //                             FIB_ROUTE_PATH_FLAG_NONE);
     }
 #if 0
   else if (r->rtm.rtm_family == AF_MPLS)

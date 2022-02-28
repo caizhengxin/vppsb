@@ -1,3 +1,9 @@
+/**
+ * @Author: jankincai
+ * @Date:   2022-02-28 15:56:20
+ * @Last Modified by:   jankincai
+ * @Last Modified time: 2022-02-28 17:26:37
+ */
 /*
  * Copyright 2016 Intel Corporation
  *
@@ -75,7 +81,7 @@ tap_inject_tx (vlib_main_t * vm, vlib_node_runtime_t * node, vlib_frame_t * f)
       tap_inject_tap_send_buffer (fd, b);
     }
 
-  vlib_buffer_free (vm, pkts, f->n_vectors);
+  // vlib_buffer_free (vm, pkts, f->n_vectors);
   return f->n_vectors;
 }
 
@@ -111,7 +117,7 @@ tap_inject_neighbor (vlib_main_t * vm,
       fd = tap_inject_lookup_tap_fd (vnet_buffer (b)->sw_if_index[VLIB_RX]);
       if (fd == ~0)
         {
-          vlib_buffer_free (vm, &bi, 1);
+          // vlib_buffer_free (vm, &bi, 1);
           continue;
         }
 
@@ -145,7 +151,7 @@ tap_inject_neighbor (vlib_main_t * vm,
 
       if (next == ~0)
         {
-          vlib_buffer_free (vm, &bi, 1);
+          // vlib_buffer_free (vm, &bi, 1);
           continue;
         }
 
